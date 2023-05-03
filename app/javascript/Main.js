@@ -3,32 +3,38 @@ import Signup from "auth/Signup";
 import React from "react";
 import RequireAuth from "auth/RequireAuth";
 import Login from "auth/Login";
-import App from "./App";
+import Root from "Root";
+import JournalView from "journal/JournalView";
+import GratitudeView from "gratitude/GratitudeView";
+import InspirationView from "inspiration/InspirationView";
+import { ROUTE_MAP } from "constants";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <RequireAuth>
-        <App />
+        <Root />
       </RequireAuth>
     ),
-  },
-  {
-    path: "notebooks/:notebookId/notes?/:noteId?",
-    element: (
-      <RequireAuth>
-        <App />
-      </RequireAuth>
-    ),
-  },
-  {
-    path: "billing/success",
-    element: (
-      <RequireAuth>
-        <App />
-      </RequireAuth>
-    ),
+    children: [
+      {
+        path: ROUTE_MAP.journal.path,
+        element: <JournalView />,
+      },
+      {
+        path: ROUTE_MAP.gratitude.path,
+        element: <GratitudeView />,
+      },
+      {
+        path: ROUTE_MAP.inspiration.path,
+        element: <InspirationView />,
+      },
+      {
+        path: "billing/success",
+        element: <JournalView />,
+      },
+    ],
   },
   {
     path: "signup",

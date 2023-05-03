@@ -1,6 +1,5 @@
 import { Layout } from "antd";
 import React, { useEffect, useState } from "react";
-import "./App.css";
 import "react-quill/dist/quill.snow.css";
 import { getNotesData } from "slices/notesSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,10 +22,6 @@ const App = () => {
   const [isZenMode, setIsZenMode] = useState(false);
 
   const [goToNote] = useGoToNote();
-  // const selectedNoteId = useSelector((state) => state.notes.selectedNoteId);
-  // const selectedNotebookId = useSelector(
-  //   (state) => state.notes.selectedNotebookId
-  // );
 
   const dispatch = useDispatch();
 
@@ -38,13 +33,6 @@ const App = () => {
       goToNote(notebookId, noteId);
     });
   }, []);
-
-  // // This useEffect is for when we update our notes, we want to make sure the URL reflects that so that if the user wants to save that to bookmarks, they can easily access it again
-  // useEffect(() => {
-  //   if (selectedNoteId || selectedNotebookId) {
-  //     navigate(getRedirectUrl(selectedNoteId, selectedNotebookId));
-  //   }
-  // }, [navigate, selectedNoteId, selectedNotebookId]);
 
   return (
     <Layout style={{ height: "100vh" }}>
