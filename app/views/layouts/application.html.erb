@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ambince - The Simple Notes App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csp_meta_tag %>
+
+    <%= favicon_link_tag asset_path('favicon.png') %>
+    <%= stylesheet_link_tag "application" %>
+    <%= stylesheet_pack_tag 'application' %>
+    <%= javascript_pack_tag "application" %>
+  </head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JDJJK8B7M3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-JDJJK8B7M3');
+  </script>
+
+  <body>
+  <div id="root">
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
+    </div>
+  </body>
+</html>

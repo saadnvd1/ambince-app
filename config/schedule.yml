@@ -1,0 +1,4 @@
+note_image_deleter:
+  cron: "0 */12 * * *" # Every 12 hours
+  class: "NoteImageDeleter"
+  queue: default
