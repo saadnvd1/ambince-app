@@ -47,7 +47,15 @@ const Root = () => {
         <Link to={"/gratitude"}>Gratitude</Link>
         <Link to={"/inspiration"}>Inspiration</Link>
       </div>
-      <Outlet />
+      <div className="content-container">
+        <Outlet />
+      </div>
+      <div className="footer-container">
+        <div>
+          <b>We're here for you ❤️</b>
+        </div>
+        <a href="mailto:help@ambince.com">help@ambince.com</a>
+      </div>
     </div>
   );
 };
