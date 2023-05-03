@@ -1,7 +1,7 @@
-class NoteVersion < ApplicationRecord
+class EntryVersion < ApplicationRecord
   include PaperTrail::VersionConcern
 
-  self.table_name = :note_versions
+  self.table_name = :entry_versions
 
   encrypts :object
   encrypts :object_changes
@@ -9,7 +9,7 @@ end
 
 # == Schema Information
 #
-# Table name: note_versions
+# Table name: entry_versions
 #
 #  id             :bigint           not null, primary key
 #  event          :string           not null
@@ -22,5 +22,5 @@ end
 #
 # Indexes
 #
-#  index_note_versions_on_item_type_and_item_id  (item_type,item_id)
+#  index_entry_versions_on_item_type_and_item_id  (item_type,item_id)
 #

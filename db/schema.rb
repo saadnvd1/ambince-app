@@ -10,10 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_28_172622) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_03_172345) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
+
+  create_table "custom_quotes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "content"
+    t.string "image"
+    t.string "author"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_custom_quotes_on_user_id"
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.bigint "journal_id"
+    t.text "title"
+    t.text "content", null: false
+    t.string "mood"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["journal_id"], name: "index_entries_on_journal_id"
+  end
+
+  create_table "entry_images", force: :cascade do |t|
+    t.string "file"
+    t.bigint "entry_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entry_id"], name: "index_entry_images_on_entry_id"
+  end
+
+  create_table "entry_versions", force: :cascade do |t|
+    t.string "item_type", null: false
+    t.bigint "item_id", null: false
+    t.string "event", null: false
+    t.string "whodunnit"
+    t.json "object"
+    t.json "object_changes"
+    t.datetime "created_at"
+    t.index ["item_type", "item_id"], name: "index_entry_versions_on_item_type_and_item_id"
+  end
 
   create_table "features", force: :cascade do |t|
     t.string "name", null: false
@@ -23,45 +61,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_172622) do
     t.index ["plan_id"], name: "index_features_on_plan_id"
   end
 
-  create_table "note_images", force: :cascade do |t|
-    t.string "file"
-    t.bigint "note_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["note_id"], name: "index_note_images_on_note_id"
-  end
-
-  create_table "note_versions", force: :cascade do |t|
-    t.string "item_type", null: false
-    t.bigint "item_id", null: false
-    t.string "event", null: false
-    t.string "whodunnit"
-    t.json "object"
-    t.json "object_changes"
-    t.datetime "created_at"
-    t.index ["item_type", "item_id"], name: "index_note_versions_on_item_type_and_item_id"
-  end
-
-  create_table "notebooks", force: :cascade do |t|
+  create_table "gratitude_entries", force: :cascade do |t|
     t.bigint "user_id"
-    t.text "name"
-    t.string "ancestry"
+    t.text "prompt", null: false
+    t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.jsonb "meta", default: {}
-    t.boolean "default", default: false, null: false
-    t.index ["ancestry"], name: "index_notebooks_on_ancestry"
-    t.index ["user_id"], name: "index_notebooks_on_user_id"
-    t.index ["user_id"], name: "index_notebooks_on_user_id_and_default_true", unique: true, where: "(\"default\" = true)"
+    t.index ["user_id"], name: "index_gratitude_entries_on_user_id"
   end
 
-  create_table "notes", force: :cascade do |t|
-    t.bigint "notebook_id"
-    t.text "content"
+  create_table "journals", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "title"
-    t.index ["notebook_id"], name: "index_notes_on_notebook_id"
+    t.index ["user_id"], name: "index_journals_on_user_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -78,6 +92,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_172622) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["plan_id"], name: "index_prices_on_plan_id"
+  end
+
+  create_table "standard_quotes", force: :cascade do |t|
+    t.string "content"
+    t.string "image_name"
+    t.string "author"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "starred", force: :cascade do |t|
+    t.string "starrable_type", null: false
+    t.bigint "starrable_id", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["starrable_type", "starrable_id"], name: "index_starred_on_starrable"
+    t.index ["user_id"], name: "index_starred_on_user_id"
   end
 
   create_table "subscriptions", force: :cascade do |t|
@@ -102,6 +134,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_172622) do
     t.index ["user_id"], name: "index_trials_on_user_id"
   end
 
+  create_table "user_settings", force: :cascade do |t|
+    t.bigint "user_id"
+    t.boolean "qotd_email_reminder_enabled", default: false
+    t.boolean "qotd_sms_reminder_enabled", default: false
+    t.string "qotd_reminder_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_settings_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -117,12 +159,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_172622) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "custom_quotes", "users"
+  add_foreign_key "entries", "journals"
+  add_foreign_key "entry_images", "entries"
   add_foreign_key "features", "plans"
-  add_foreign_key "note_images", "notes"
-  add_foreign_key "notebooks", "users"
-  add_foreign_key "notes", "notebooks"
+  add_foreign_key "gratitude_entries", "users"
+  add_foreign_key "journals", "users"
   add_foreign_key "prices", "plans"
+  add_foreign_key "starred", "users"
   add_foreign_key "subscriptions", "plans"
   add_foreign_key "subscriptions", "users"
   add_foreign_key "trials", "users"
+  add_foreign_key "user_settings", "users"
 end

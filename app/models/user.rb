@@ -5,8 +5,8 @@ class User < ApplicationRecord
     :jwt_authenticatable, jwt_revocation_strategy: self
 
   with_options dependent: :destroy do
-    has_many :notebooks
-    has_many :notes, through: :notebooks
+    has_many :journals
+    has_many :entries, through: :journals
 
     has_one :plan, through: :subscription
     has_many :features, through: :plan
@@ -27,10 +27,6 @@ class User < ApplicationRecord
   # used to determine if the user has access to premium features or not
   def premium?
     paying? || on_trial?
-  end
-
-  def default_notebook
-    notebooks.find_by(default: true)
   end
 end
 
