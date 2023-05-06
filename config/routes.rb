@@ -15,7 +15,8 @@ Rails.application.routes.draw do
   get "logged_in", to: "home#check_logged_in"
   get "notes", to: "home#notes"
 
-  resources :notes, only: [:update, :index, :create]
+  resources :entries, only: [:update, :index, :create, :destroy]
+  # resources :journal, only: [:update, :index, :create, :destroy]
   resources :notebooks, only: [:create, :update]
   resources :images, only: [:create]
 

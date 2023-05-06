@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import {
   UsersIcon,
@@ -32,6 +32,8 @@ const Root = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  useEffect(() => navigate("/journal"), []);
 
   return (
     <div id="root-container">

@@ -12,8 +12,10 @@ module Ambince
     config.load_defaults 7.0
 
     # TODO: remove when ready to release
-    config.active_record.encryption.support_unencrypted_data = true
-    config.active_record.encryption.extend_queries = true
+    unless Rails.env.production?
+      config.active_record.encryption.support_unencrypted_data = true
+      config.active_record.encryption.extend_queries = true
+    end
 
     # Configuration for the application, engines, and railties goes here.
     #

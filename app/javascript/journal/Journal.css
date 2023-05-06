@@ -21,6 +21,7 @@
     padding: 10px;
     cursor: pointer;
     border-radius: 3px;
+    transition: 0.3s;
 }
 
 .journal-entry-item-selected {
@@ -42,11 +43,28 @@
 
 .journal-entry-new-btn-container {
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 10px;
+}
+
+.journal-entry-new-btn {
+    transition: 0.3s;
 }
 
 .journal-entry-new-btn:hover {
     color: var(--pink);
     cursor: pointer;
+    opacity: 1;
+}
+
+.journal-entry-title-input {
+    border: none;
+    outline: none;
+    font-size: 20px;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    cursor: text;
 }

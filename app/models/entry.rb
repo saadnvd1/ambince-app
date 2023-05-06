@@ -14,6 +14,8 @@ class Entry < ApplicationRecord
 
   encrypts :content
   encrypts :title, deterministic: true
+
+  scope :by_recently_created, -> { order(created_at: :desc) }
 end
 
 # == Schema Information
