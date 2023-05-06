@@ -40,7 +40,7 @@
     background-color: #fff;
 }
 
-.journal-entry-new-btn {
+.journal-entry-new-btn-container {
     display: flex;
     justify-content: right;
     margin-bottom: 10px;
@@ -48,4 +48,5 @@
 
 .journal-entry-new-btn:hover {
     color: var(--pink);
+    cursor: pointer;
 }

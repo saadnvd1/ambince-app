@@ -3,6 +3,7 @@ import "./Journal.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { StarIcon, PencilIcon } from "@heroicons/react/24/outline";
+import { Tooltip } from "antd";
 
 const JournalView = () => {
   const [value, setValue] = useState("");
@@ -82,11 +83,20 @@ const JournalView = () => {
         </ul>
       </div>
       <div className="journal-entry-container">
-        <div className="journal-entry-new-btn">
-          <PencilIcon height={32} />
+        <div className="journal-entry-new-btn-container">
+          <Tooltip title={"New Entry"}>
+            <span>
+              <PencilIcon height={32} className="journal-entry-new-btn" />
+            </span>
+          </Tooltip>
         </div>
         <div className="journal-entry-editor">
-          <ReactQuill theme="snow" value={value} onChange={setValue} />
+          <ReactQuill
+            theme="snow"
+            value={value}
+            onChange={setValue}
+            scrollingContainer="html"
+          />
         </div>
       </div>
     </div>

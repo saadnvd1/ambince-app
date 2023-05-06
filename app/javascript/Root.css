@@ -6,13 +6,13 @@
     /*outline: 1px solid #f00 !important;*/
 }
 
-body {
-    min-height: 100%;
-}
-
 :root {
   --pink: #ff87b3;
   --white: #ffffff;
+}
+
+#root-container {
+    height: 100vh;
 }
 
 .nav-container {
@@ -50,10 +50,10 @@ a:hover {
     background-color: #f0f1f3;
     padding: 40px;
     padding-top: 120px;
-    overflow: auto;
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 100px;
+    min-height: 100%;
 }
 
 .footer-container {

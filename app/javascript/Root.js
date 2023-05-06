@@ -34,7 +34,7 @@ const Root = () => {
   } = theme.useToken();
 
   return (
-    <div>
+    <div id="root-container">
       <div className="nav-container">
         <img
           src={LogoFull}
