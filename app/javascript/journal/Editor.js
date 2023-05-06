@@ -4,17 +4,11 @@ import { useSelector } from "react-redux";
 import { selectActiveEntry } from "journal/journalSelectors";
 
 const Editor = () => {
-  const [value, setValue] = useState("");
   const entry = useSelector(selectActiveEntry);
-
-  useEffect(() => {
-    if (entry) {
-      setValue(entry.content);
-    }
-  }, [entry]);
+  const [value, setValue] = useState(entry.content || "");
 
   return (
-    <div className="journal-entry-editor" key={entry?.id}>
+    <div className="journal-entry-editor">
       <ReactQuill
         theme="snow"
         value={value}

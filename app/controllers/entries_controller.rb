@@ -9,6 +9,14 @@ class EntriesController < ApplicationController
     render json: { entries: @entries, latest_entry_id: current_user.entries.by_recently_created.first.try(:id) }
   end
 
+  def update
+    @entry = Entry.find(update_params[:id])
+    authorize! :update, @entry
+
+    @entry.update(update_params)
+    render json: format_entry(@entry)
+  end
+
   def create
     @entry = Entry.create!(
       journal: current_user.journals.first,
@@ -20,6 +28,10 @@ class EntriesController < ApplicationController
   end
 
   private
+
+  def update_params
+    params.permit(:id, :content, :title)
+  end
 
   def format_entry(entry)
     {

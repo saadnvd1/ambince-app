@@ -2,6 +2,7 @@ import { StarIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateActiveEntryId } from "journal/journalSlice";
+import { isEmpty } from "lodash";
 
 const EntriesList = () => {
   const dispatch = useDispatch();

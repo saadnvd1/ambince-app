@@ -4,14 +4,14 @@ class Ability
   def initialize(user)
     return unless user.present?
 
-    Notebook.tap do |klass|
-      can :create, Notebook, user: user
-      can :update, Notebook, user: user
-    end
+    # Notebook.tap do |klass|
+    #   can :create, Notebook, user: user
+    #   can :update, Notebook, user: user
+    # end
 
-    Note.tap do |klass|
-      can :update, Note, user: user
-      can :create, Note, user: user
+    Entry.tap do |klass|
+      can :update, Entry, user: user
+      can :create, Entry, user: user
     end
   end
 end
