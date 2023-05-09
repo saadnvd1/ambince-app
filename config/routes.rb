@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get "notes", to: "home#notes"
 
   resources :entries, only: [:update, :index, :create, :destroy]
+  resources :quotes, only: [:index]
   # resources :journal, only: [:update, :index, :create, :destroy]
   resources :notebooks, only: [:create, :update]
   resources :images, only: [:create]

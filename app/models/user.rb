@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   with_options dependent: :destroy do
     has_many :journals
+    has_many :starred
+
     has_many :entries, through: :journals
 
     has_one :plan, through: :subscription

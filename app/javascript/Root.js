@@ -34,7 +34,14 @@ const Root = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  useEffect(() => navigate("/journal"), []);
+  useEffect(() => {
+    if (
+      !window.location.href.includes("inspiration") &&
+      !window.location.href.includes("gratitude")
+    ) {
+      navigate("/journal");
+    }
+  }, []);
 
   return (
     <div id="root-container">
