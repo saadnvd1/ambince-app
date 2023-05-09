@@ -37,6 +37,7 @@ const EntriesList = () => {
                 activeEntryId === entry.id ? "journal-entry-item-selected" : ""
               }`}
               onClick={() => handleEntryClick(entry.id)}
+              key={`entries-list-${entry.id}`}
             >
               <p>{entry.title}</p>
               <p className="highlight mt2">{entry.created_at}</p>

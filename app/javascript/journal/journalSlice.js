@@ -57,6 +57,7 @@ export const journalSlice = createSlice({
     });
     builder.addCase(createEntry.fulfilled, (state, action) => {
       state.entries[action.payload.id] = action.payload;
+      state.activeEntryId = action.payload.id;
     });
     builder.addCase(updateEntry.fulfilled, (state, action) => {
       state.entries[action.payload.id].title = action.payload.title;
