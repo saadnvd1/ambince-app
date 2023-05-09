@@ -31,6 +31,15 @@ export const updateEntry = createAsyncThunk(
   }
 );
 
+export const destroyEntry = createAsyncThunk(
+  "journal/destroyEntry",
+  async (id, thunkAPI) => {
+    debugger;
+    const response = await axiosI.delete(`/entries/${id}`);
+    return response.data;
+  }
+);
+
 export const journalSlice = createSlice({
   name: "journal",
   initialState,
@@ -58,6 +67,10 @@ export const journalSlice = createSlice({
     builder.addCase(createEntry.fulfilled, (state, action) => {
       state.entries[action.payload.id] = action.payload;
       state.activeEntryId = action.payload.id;
+    });
+    builder.addCase(destroyEntry.fulfilled, (state, action) => {
+      delete state.entries[action.meta.arg];
+      state.activeEntryId = action.payload.latest_entry_id;
     });
     builder.addCase(updateEntry.fulfilled, (state, action) => {
       state.entries[action.payload.id].title = action.payload.title;

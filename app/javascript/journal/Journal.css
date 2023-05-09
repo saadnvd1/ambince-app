@@ -17,6 +17,10 @@
 }
 
 .journal-entry-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     font-size: 13px;
     padding: 10px;
     cursor: pointer;
@@ -29,7 +33,8 @@
 }
 
 .journal-entry-item:hover {
-    background-color: #fff;
+    background-color: #000000;
+    color: #fff;
 }
 
 .journal-entry-container {

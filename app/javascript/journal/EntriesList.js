@@ -1,8 +1,10 @@
 import { StarIcon } from "@heroicons/react/24/outline";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateActiveEntryId } from "journal/journalSlice";
 import { isEmpty } from "lodash";
+import EntryDropdownMenu from "journal/EntryDropdownMenu";
+import EntryListItem from "journal/EntryListItem";
 
 const EntriesList = () => {
   const dispatch = useDispatch();
@@ -32,16 +34,12 @@ const EntriesList = () => {
         {/*</li>*/}
         {entriesSorted.map((entry) => {
           return (
-            <li
-              className={`journal-entry-item ${
-                activeEntryId === entry.id ? "journal-entry-item-selected" : ""
-              }`}
-              onClick={() => handleEntryClick(entry.id)}
-              key={`entries-list-${entry.id}`}
-            >
-              <p>{entry.title}</p>
-              <p className="highlight mt2">{entry.created_at}</p>
-            </li>
+            <EntryListItem
+              activeEntryId={activeEntryId}
+              entry={entry}
+              key={`entry-list-item-${entry.id}`}
+              handleEntryClick={handleEntryClick}
+            />
           );
         })}
         {/*<li className="journal-entry-item journal-entry-item-selected">*/}

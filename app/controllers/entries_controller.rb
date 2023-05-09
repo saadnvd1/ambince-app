@@ -27,6 +27,14 @@ class EntriesController < ApplicationController
     render json: format_entry(@entry)
   end
 
+  def destroy
+    @entry = Entry.find(update_params[:id])
+    authorize! :update, @entry
+    @entry.destroy!
+
+    render json: { latest_entry_id: current_user.entries.by_recently_created.first.try(:id) }
+  end
+
   private
 
   def update_params

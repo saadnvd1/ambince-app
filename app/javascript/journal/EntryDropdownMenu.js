@@ -1,14 +1,16 @@
 import React, { useMemo } from "react";
+import { Bars4Icon, TrashIcon } from "@heroicons/react/24/solid";
 import { Dropdown } from "antd";
-import { EditOutlined, SmileOutlined } from "@ant-design/icons";
-import {
-  PencilSquareIcon,
-  TrashIcon,
-  FolderPlusIcon,
-} from "@heroicons/react/24/solid";
+import { destroyEntry } from "journal/journalSlice";
+import { useDispatch } from "react-redux";
 
-const EditDropdown = ({ isSubnotebook, notebookId, toggleIsEditing }) => {
-  const handleDelete = () => {};
+const EntryDropdownMenu = ({ entry }) => {
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    debugger;
+    dispatch(destroyEntry(entry.id));
+  };
 
   const handleMenuClick = ({ key, domEvent }) => {
     domEvent.stopPropagation();
@@ -37,9 +39,9 @@ const EditDropdown = ({ isSubnotebook, notebookId, toggleIsEditing }) => {
 
   return (
     <Dropdown menu={{ items, onClick: handleMenuClick }}>
-      <EditOutlined />
+      <Bars4Icon height={16} />
     </Dropdown>
   );
 };
 
-export default EditDropdown;
+export default EntryDropdownMenu;
