@@ -41,9 +41,30 @@
     background-image: url("images/standard_quotes/ambince-short-perseverance.png");
     background-size: contain;
     border-radius: 30px;
+    position: relative;
+}
+
+.inspiration-card-hover-container {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    background-color: white;
+    color: var(--pink);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+    padding: 8px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.inspiration-card-hover-container:hover {
+    transform: scale(1.1);
 }
 
 .inspiration-card-only-text-black {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;

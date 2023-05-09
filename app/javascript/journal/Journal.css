@@ -4,6 +4,10 @@
     align-items: flex-start;
 }
 
+.ql-editor {
+    font-size: 16px;
+}
+
 .journal-entries-container {
     flex-basis: 25%;
     max-width: 25%;

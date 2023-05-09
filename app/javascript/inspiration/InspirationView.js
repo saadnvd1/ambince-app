@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Inspiration.css";
 import { MagnifyingGlassIcon, StarIcon } from "@heroicons/react/24/outline";
+import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 
 const InspirationView = () => {
   const [activeMenu, setActiveMenu] = useState("discover");
@@ -41,7 +42,11 @@ const InspirationView = () => {
             </p>
           </div>
         </div>
-        <div className="inspiration-card"></div>
+        <div className="inspiration-card">
+          <div className="inspiration-card-hover-container">
+            <StarIconSolid />
+          </div>
+        </div>
         <div className="inspiration-card"></div>
         <div className="inspiration-card"></div>
         <div className="inspiration-card-only-text-black">
@@ -57,6 +62,9 @@ const InspirationView = () => {
         </div>
         <div className="inspiration-card"></div>
         <div className="inspiration-card-only-text-black">
+          <div className="inspiration-card-hover-container">
+            <StarIconSolid />
+          </div>
           You will face many defeats in your life, but never let yourself be
           defeated. Face your fear with faith and your fear will become a
           fortitude of fiery courage and a future full of promise.
