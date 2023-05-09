@@ -3,11 +3,12 @@ import React, { useEffect, useMemo, useState } from "react";
 import {
   UsersIcon,
   CalendarDaysIcon,
-  HomeIcon,
-  ClockIcon,
-} from "@heroicons/react/24/solid";
+  HeartIcon,
+  PencilSquareIcon,
+  LightBulbIcon,
+} from "@heroicons/react/24/outline";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate, NavLink } from "react-router-dom";
 import GlobalComponents from "GlobalComponents";
 import LogoFull from "images/logo-full.jpg";
 import LogoCollapsed from "images/logo-collapsed.png";
@@ -45,9 +46,36 @@ const Root = () => {
             height: 60,
           }}
         />
-        <Link to={"/journal"}>Journal</Link>
-        <Link to={"/gratitude"}>Gratitude</Link>
-        <Link to={"/inspiration"}>Inspiration</Link>
+        <NavLink
+          className={({ isActive, isPending }) =>
+            isActive ? "active-link" : ""
+          }
+          to={"/journal"}
+        >
+          <p className="nav-item">
+            <PencilSquareIcon height={24} /> Journal
+          </p>
+        </NavLink>
+        <NavLink
+          className={({ isActive, isPending }) =>
+            isActive ? "active-link" : ""
+          }
+          to={"/gratitude"}
+        >
+          <p className="nav-item">
+            <HeartIcon height={24} /> Gratitude
+          </p>
+        </NavLink>
+        <NavLink
+          className={({ isActive, isPending }) =>
+            isActive ? "active-link" : ""
+          }
+          to={"/inspiration"}
+        >
+          <p className="nav-item">
+            <LightBulbIcon height={24} /> Inspiration
+          </p>
+        </NavLink>
       </div>
       <div className="content-container">
         <Outlet />

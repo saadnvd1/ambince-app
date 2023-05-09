@@ -29,6 +29,13 @@
     box-shadow: 1px 1px 6px 2px rgba(0, 0, 0, .1);
 }
 
+.nav-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+
 a {
     color: #46494c;
     text-decoration: none;
@@ -36,6 +43,10 @@ a {
 
 a:hover {
     color: var(--pink)
+}
+
+.active-link {
+    color: var(--pink);
 }
 
 .mt2 {
