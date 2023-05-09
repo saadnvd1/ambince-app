@@ -30,10 +30,37 @@ const InspirationView = () => {
         <div className="inspiration-card"></div>
         <div className="inspiration-card"></div>
         <div className="inspiration-card"></div>
+        <div className="inspiration-card-only-text-black">
+          <div className="quote-content-container">
+            <p>
+              If they can get you asking the wrong questions, they don't have to
+              worry about answers.
+            </p>
+            <p className="quote-author">
+              <i>Albert Einstein</i>
+            </p>
+          </div>
+        </div>
         <div className="inspiration-card"></div>
         <div className="inspiration-card"></div>
         <div className="inspiration-card"></div>
+        <div className="inspiration-card-only-text-black">
+          <div className="quote-content-container">
+            <p>
+              It is the mark of an educated mind, to entertain a thought without
+              accepting it
+            </p>
+            <p className="quote-author">
+              <i>Aristotle</i>
+            </p>
+          </div>
+        </div>
         <div className="inspiration-card"></div>
+        <div className="inspiration-card-only-text-black">
+          You will face many defeats in your life, but never let yourself be
+          defeated. Face your fear with faith and your fear will become a
+          fortitude of fiery courage and a future full of promise.
+        </div>
       </div>
     </div>
   );
