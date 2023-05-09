@@ -54,12 +54,18 @@
 }
 
 .journal-entry-new-btn {
+    background-color: var(--pink);
+    color: #F0F1F3;
     transition: 0.3s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+    opacity: 0.8;
 }
 
 .journal-entry-new-btn:hover {
-    color: var(--pink);
-    cursor: pointer;
+    transform: scale(1.1);
     opacity: 1;
 }
 
