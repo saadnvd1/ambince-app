@@ -12,18 +12,7 @@ import { Link, Outlet, useNavigate, NavLink } from "react-router-dom";
 import LogoFull from "images/logo-full.jpg";
 import "./Root.css";
 import UserSettings from "UserSettings";
-
-const { Header, Content, Footer, Sider } = Layout;
-
-function getItem(label, key, icon, children, onClick) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    onClick,
-  };
-}
+import Footer from "Footer";
 
 const Root = () => {
   const navigate = useNavigate();
@@ -99,12 +88,7 @@ const Root = () => {
       <div className="content-container">
         <Outlet />
       </div>
-      <div className="footer-container">
-        <div>
-          <b>We're here for you ❤️</b>
-        </div>
-        <a href="mailto:help@ambince.com">help@ambince.com</a>
-      </div>
+      <Footer />
     </div>
   );
 };
