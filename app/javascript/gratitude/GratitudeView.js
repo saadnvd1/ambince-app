@@ -71,6 +71,7 @@ const GratitudeView = () => {
           defaultValue={prompt}
           onChange={handleChangePrompt}
           onSelect={handleChangePrompt}
+          onBlur={() => setIsChangingPrompt(false)}
         >
           {prompts.map((p) => {
             return (
@@ -111,7 +112,7 @@ const GratitudeView = () => {
           return (
             <li className={"gratitude-entry-card"}>
               <div className={"gratitude-card-header"}>
-                <p className={"gratitude-entry-date"}>5/23/2023</p>
+                <p className={"gratitude-entry-date"}>{entry.created_at}</p>
                 <p className={"gratitude-entry-prompt"}>{entry.prompt}</p>
               </div>
               <div
