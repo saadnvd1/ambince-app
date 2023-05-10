@@ -7,7 +7,7 @@ class CreateUser < ActiveInteraction::Base
       user.save!
 
       create_trial(user)
-      create_standard_notebook(user)
+      create_journal(user)
 
       user
     end
@@ -15,15 +15,16 @@ class CreateUser < ActiveInteraction::Base
 
   private
 
-  def create_standard_notebook(user)
+  def create_journal(user)
     Journal.create!(
       user: user,
       name: "My Journal",
     )
 
     Entry.create!(
-      notebook: user.journals.first,
+      journal: user.journals.first,
       title: "#{Time.now.strftime("%m/%d/%y")}",
+      content: ""
     )
   end
 
