@@ -4,6 +4,12 @@ class CreateUser < ActiveInteraction::Base
   def execute
     ActiveRecord::Base.transaction do
       user = User.new(user_params)
+
+      if User.find_by_email(user_params[:email].downcase).present?
+        errors.add(:base, "Sorry, it looks like that e-mail already exists. Try logging in instead.")
+        return
+      end
+
       user.save!
 
       create_trial(user)

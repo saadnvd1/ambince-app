@@ -26,8 +26,9 @@ const Auth = ({ type }) => {
     const action = type === "login" ? login : register;
     dispatch(action({ email: values.email, password: values.password }))
       .unwrap()
-      .catch(() => {
-        toastError("Sorry, that doesn't seem right. Try again.");
+      .catch((error) => {
+        console.log("error", error);
+        toastError(error.error);
       });
   };
 
@@ -63,6 +64,7 @@ const Auth = ({ type }) => {
                 }}
                 onFinish={handleSubmit}
                 autoComplete="off"
+                validateTrigger={"onSubmit"}
               >
                 <Form.Item
                   name="email"
@@ -83,6 +85,11 @@ const Auth = ({ type }) => {
                     {
                       required: true,
                       message: "Please enter a password",
+                    },
+                    {
+                      min: 8,
+                      message:
+                        "Password has to be a minimum of 8 characters long",
                     },
                   ]}
                 >

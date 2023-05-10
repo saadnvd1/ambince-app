@@ -18,17 +18,28 @@ export const updateUser = createAsyncThunk("users/updateUser", async (data) => {
   return response.data;
 });
 
-export const login = createAsyncThunk("users/login", async (data) => {
-  const response = await axiosInstance.post("/users/sign_in", { user: data });
-  return response.data;
+export const login = createAsyncThunk("users/login", async (data, thunkAPI) => {
+  try {
+    const response = await axiosInstance.post("/users/sign_in", { user: data });
+    return response.data;
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.response.data);
+  }
 });
 
-export const register = createAsyncThunk("users/register", async (data) => {
-  const response = await axiosInstance.post("/users", { user: data });
-  return response.data;
-});
+export const register = createAsyncThunk(
+  "users/register",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axiosInstance.post("/users", { user: data });
+      return response.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data);
+    }
+  }
+);
 
-export const logout = createAsyncThunk("users/logout", async () => {
+export const logout = createAsyncThunk("users/logout", async (thunkAPI) => {
   const response = await axiosInstance.delete("/users/sign_out.json");
   return response.data;
 });

@@ -1,13 +1,14 @@
 class RegistrationsController < Devise::RegistrationsController
   respond_to :json
   def create
-    @user = CreateUser.run!(user_params)
-    if @user.save
-      sign_in :user, @user
+    result = CreateUser.run(user_params)
+
+    if result.valid?
+      sign_in :user, result.result
       render "home/session_data"
     else
       warden.custom_failure!
-      render json: {error: "signup error"}, status: :unprocessable_entity
+      render json: {error: result.errors.full_messages.first }, status: :unprocessable_entity
     end
   end
 
