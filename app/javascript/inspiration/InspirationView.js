@@ -1,12 +1,16 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./Inspiration.css";
 import { MagnifyingGlassIcon, StarIcon } from "@heroicons/react/24/outline";
-import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { getData } from "inspiration/inspirationSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Spin } from "antd";
-import { isEmpty, shuffle } from "lodash";
-import InspirationCard from "inspiration/InspirationCard";
+import Discover from "inspiration/Discover";
+import Starred from "inspiration/Starred";
+
+const PAGE_COMPONENT_MAP = {
+  discover: Discover,
+  starred: Starred,
+};
 
 const InspirationView = () => {
   const dispatch = useDispatch();
@@ -16,29 +20,15 @@ const InspirationView = () => {
     (state) => state.inspiration.fetchingInitialData
   );
 
-  const standardQuotes = useSelector(
-    (state) => state.inspiration.standardQuotes
-  );
-
   useEffect(() => {
     dispatch(getData());
   }, []);
 
-  const quotes = useMemo(() => {
-    if (!isEmpty(standardQuotes)) {
-      return shuffle(
-        Object.entries(standardQuotes).map(([quoteId, quoteData]) => {
-          return quoteData;
-        })
-      );
-    }
-
-    return [];
-  }, [standardQuotes]);
-
   if (fetchingInitialData) {
     return <Spin />;
   }
+
+  const ActiveComponent = PAGE_COMPONENT_MAP[activeMenu];
 
   return (
     <div>
@@ -61,11 +51,7 @@ const InspirationView = () => {
         </p>
       </div>
       <div className="inspiration-container">
-        {quotes.map((quote) => {
-          return (
-            <InspirationCard quote={quote} key={`discover-quote-${quote.id}`} />
-          );
-        })}
+        <ActiveComponent />
       </div>
     </div>
   );
