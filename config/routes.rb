@@ -16,9 +16,14 @@ Rails.application.routes.draw do
   get "notes", to: "home#notes"
 
   resources :entries, only: [:update, :index, :create, :destroy]
-  resources :quotes, only: [:index]
+
+  resources :quotes, only: [:index] do
+    collection do
+      post "toggle_star/:id", to: "quotes#toggle_star"
+    end
+  end
+
   # resources :journal, only: [:update, :index, :create, :destroy]
-  resources :notebooks, only: [:create, :update]
   resources :images, only: [:create]
 
   resources :billing, only: [:index] do

@@ -2,7 +2,7 @@ class Starred < ApplicationRecord
   self.table_name = :starred
 
   belongs_to :user
-  belongs_to :starrable
+  belongs_to :starrable, polymorphic: true
 
   scope :quotes, -> { where(starrable_type: "StandardQuote") }
 end

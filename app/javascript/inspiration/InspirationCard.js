@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { StarIcon } from "@heroicons/react/24/outline";
+import { toggleQuoteStar } from "inspiration/inspirationSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectQuoteIsStarred } from "inspiration/selectors";
 
 const InspirationCard = ({ quote }) => {
   const [hovered, setHovered] = useState(false);
+  const quoteIsStarred = useSelector((state) =>
+    selectQuoteIsStarred(state, { quoteId: quote.id })
+  );
+  const dispatch = useDispatch();
 
   function importAll(r) {
     let images = {};
@@ -39,6 +46,12 @@ const InspirationCard = ({ quote }) => {
     }
   };
 
+  const handleToggleStar = () => {
+    dispatch(toggleQuoteStar(quote.id));
+  };
+
+  const StarComponent = quoteIsStarred ? StarIconSolid : StarIcon;
+
   return (
     <div
       className={getContainerClassName()}
@@ -47,8 +60,11 @@ const InspirationCard = ({ quote }) => {
       onMouseLeave={() => setHovered(false)}
     >
       {hovered && (
-        <div className="inspiration-card-hover-container">
-          <StarIcon />
+        <div
+          className="inspiration-card-hover-container"
+          onClick={handleToggleStar}
+        >
+          <StarComponent />
         </div>
       )}
       {quote.content && (

@@ -15,10 +15,10 @@ export const getData = createAsyncThunk(
   }
 );
 
-export const updateEntry = createAsyncThunk(
-  "journal/updateEntry",
-  async (data, thunkAPI) => {
-    const response = await axiosI.patch(`/entries/${data.id}`, { ...data });
+export const toggleQuoteStar = createAsyncThunk(
+  "inspiration/toggleQuoteStar",
+  async (quoteId, thunkAPI) => {
+    const response = await axiosI.post(`/quotes/toggle_star/${quoteId}`);
     return response.data;
   }
 );
@@ -45,6 +45,15 @@ export const inspirationSlice = createSlice({
     });
     builder.addCase(getData.rejected, (state, action) => {
       state.fetchingInitialData = false;
+    });
+    builder.addCase(toggleQuoteStar.fulfilled, (state, action) => {
+      const { starred_quote } = action.payload;
+
+      if (starred_quote) {
+        state.starredQuotes[starred_quote.standard_quote_id] = starred_quote;
+      } else {
+        delete state.starredQuotes[action.meta.arg];
+      }
     });
   },
 });
