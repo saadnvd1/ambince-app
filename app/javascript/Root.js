@@ -2,18 +2,16 @@ import React, { useEffect, useMemo, useState } from "react";
 
 import {
   UsersIcon,
-  CalendarDaysIcon,
+  RocketLaunchIcon,
   HeartIcon,
   PencilSquareIcon,
   LightBulbIcon,
 } from "@heroicons/react/24/outline";
-import { Breadcrumb, Layout, Menu, theme } from "antd";
+import { Avatar, Breadcrumb, Layout, Menu, theme } from "antd";
 import { Link, Outlet, useNavigate, NavLink } from "react-router-dom";
-import GlobalComponents from "GlobalComponents";
 import LogoFull from "images/logo-full.jpg";
-import LogoCollapsed from "images/logo-collapsed.png";
-import { ROUTE_MAP } from "./constants";
 import "./Root.css";
+import UserSettings from "UserSettings";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -86,6 +84,17 @@ const Root = () => {
             <LightBulbIcon height={24} /> Inspiration
           </p>
         </NavLink>
+        <NavLink
+          className={({ isActive, isPending }) =>
+            isActive ? "active-link" : ""
+          }
+          to={"/support"}
+        >
+          <p className="nav-item">
+            <RocketLaunchIcon height={24} /> Support
+          </p>
+        </NavLink>
+        <UserSettings />
       </div>
       <div className="content-container">
         <Outlet />
