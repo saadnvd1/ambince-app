@@ -1,0 +1,81 @@
+.gratitude-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gratitude-editor-container {
+    background-color: white;
+    width: 100%;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.past-entries-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #aeaeae;
+    gap: 4px;
+}
+
+.gratitude-entries-container {
+    margin-top: 12px;
+    width: 100%;
+    list-style-type: none;
+}
+
+.gratitude-entry-card {
+    background: white;
+    border-radius: 15px;
+    color: black;
+}
+
+.gratitude-entry-card:not(:last-child) {
+    margin-bottom: 30px;
+}
+
+.gratitude-card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--pink);
+    background-color: black;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    font-size: 16px;
+}
+
+.gratitude-entry-card:nth-child(odd) .gratitude-card-header {
+    background-color: black;
+}
+
+.gratitude-entry-body {
+    line-height: 30px;
+    padding: 15px;
+}
+
+.gratitude-entry-date {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.save-entry-btn {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.gratitude-prompt {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+
+.gratitude-prompt:hover {
+    color: var(--pink);
+}

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get "notes", to: "home#notes"
 
   resources :entries, only: [:update, :index, :create, :destroy]
+  resources :gratitude_entries, only: [:update, :index, :create, :destroy]
 
   resources :quotes, only: [:index] do
     collection do

@@ -46,13 +46,16 @@ const Root = () => {
   return (
     <div id="root-container">
       <div className="nav-container">
-        <img
-          src={LogoFull}
-          style={{
-            width: 130,
-            height: 60,
-          }}
-        />
+        <a onClick={() => navigate("/journal")}>
+          <img
+            src={LogoFull}
+            style={{
+              width: 130,
+              height: 60,
+              cursor: "pointer",
+            }}
+          />
+        </a>
         <NavLink
           className={({ isActive, isPending }) =>
             isActive ? "active-link" : ""

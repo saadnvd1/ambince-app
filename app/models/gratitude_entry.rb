@@ -1,4 +1,14 @@
 class GratitudeEntry < ApplicationRecord
+  PROMPTS = [
+    "What are you grateful for today?",
+    "What's something you're really proud about?",
+    "What kindness did you show someone today?",
+    "What difficulty did you overcome today?",
+    "What made you feel better today?",
+    "Who made your day better today?",
+    "What were the highlights of your day?"
+  ].freeze
+
   belongs_to :user
 
   encrypts :content

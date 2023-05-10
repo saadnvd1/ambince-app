@@ -5,6 +5,7 @@ import modalsReducer from "./slices/modalSlice";
 import imagesReducer from "./slices/imagesSlice";
 import journalReducer from "./journal/journalSlice";
 import inspirationReducer from "./inspiration/inspirationSlice";
+import gratitudeReducer from "./gratitude/gratitudeSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     images: imagesReducer,
     journal: journalReducer,
     inspiration: inspirationReducer,
+    gratitude: gratitudeReducer,
   },
 });
 
