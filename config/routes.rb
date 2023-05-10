@@ -3,6 +3,10 @@ require "sidekiq/web"
 Rails.application.routes.draw do
   devise_for :users, controllers: {registrations: "registrations", sessions: "sessions"}
 
+  devise_scope :user do
+    post "request_code", to: "registrations#request_code"
+  end
+
   Sidekiq::Web.use Rack::Auth::Basic do |username, password|
     username == Rails.application.credentials.sidekiq[:username] && password == Rails.application.credentials.sidekiq[:password]
   end

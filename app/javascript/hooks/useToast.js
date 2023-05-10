@@ -3,5 +3,9 @@ import { useNotificationCenter } from "react-toastify/addons/use-notification-ce
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const useToast = () => ({ toastError: (msg) => toast(msg, { type: "error" }) });
+const useToast = () => ({
+  toastError: (msg) => toast(msg, { type: "error" }),
+  toastSuccess: (msg) => toast(msg, { type: "success" }),
+  toastInfo: (msg) => toast(msg, { type: "info" }),
+});
 export default useToast;

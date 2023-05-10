@@ -1,5 +1,5 @@
 class CreateUser < ActiveInteraction::Base
-  string :email, :password
+  string :email, :password, :code
 
   def execute
     ActiveRecord::Base.transaction do
@@ -7,6 +7,9 @@ class CreateUser < ActiveInteraction::Base
 
       if User.find_by_email(user_params[:email].downcase).present?
         errors.add(:base, "Sorry, it looks like that e-mail already exists. Try logging in instead.")
+        return
+      elsif $redis.get("verify-code-#{email}") != code
+        errors.add(:base, "Sorry, it looks like that code is invalid. Try registering again.")
         return
       end
 

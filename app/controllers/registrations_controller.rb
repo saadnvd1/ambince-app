@@ -12,6 +12,20 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def request_code
+    code = (SecureRandom.random_number(9e5) + 1e5).to_i
+    email = request_code_params[:email]
+
+    $redis.setex("verify-code-#{email}", 30.minutes.to_i, code.to_json)
+
+    SendEmail.run!(params: {
+        to_email: email,
+        template_id: "d-7f20307253694e299d0520686d50eef2",
+        template_params: { code: code }
+      }
+    )
+  end
+
   def update
     @user = current_user
     @user.assign_attributes(user_params.except(:meta))
@@ -35,7 +49,11 @@ class RegistrationsController < Devise::RegistrationsController
 
   private
 
+  def request_code_params
+    params.permit(:email)
+  end
+
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, meta: {})
+    params.require(:user).permit(:email, :password, :password_confirmation, :code, meta: {})
   end
 end

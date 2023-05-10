@@ -39,6 +39,18 @@ export const register = createAsyncThunk(
   }
 );
 
+export const requestCode = createAsyncThunk(
+  "users/requestCode",
+  async (email, thunkAPI) => {
+    try {
+      const response = await axiosInstance.post("/request_code", { email });
+      return response.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data);
+    }
+  }
+);
+
 export const logout = createAsyncThunk("users/logout", async (thunkAPI) => {
   const response = await axiosInstance.delete("/users/sign_out.json");
   return response.data;

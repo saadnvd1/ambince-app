@@ -1,7 +1,7 @@
 import { Button, Checkbox, Form, Input, Layout } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "auth/Auth.css";
-import { checkLoggedIn, login, register } from "slices/userSlice";
+import { checkLoggedIn, login, register, requestCode } from "slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import useToast from "hooks/useToast";
@@ -10,7 +10,9 @@ import Logo from "images/logo-full.jpg";
 import Footer from "Footer";
 
 const Auth = ({ type }) => {
-  const { toastError } = useToast();
+  const [verifyCode, setVerifyCode] = useState(false);
+
+  const { toastError, toastInfo } = useToast();
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
   const { state } = useLocation();
@@ -23,14 +25,30 @@ const Auth = ({ type }) => {
   }, []);
 
   const handleSubmit = (values) => {
-    const action = type === "login" ? login : register;
-    dispatch(action({ email: values.email, password: values.password }))
-      .unwrap()
-      .catch((error) => {
-        console.log("error", error);
-        toastError(error.error);
-      });
+    if (type === "signup" && !verifyCode) {
+      toastInfo("Please check your e-mail for a verification code");
+      setVerifyCode(true);
+      dispatch(requestCode(values.email));
+    } else {
+      const action = type === "login" ? login : register;
+      dispatch(
+        action({
+          email: values.email,
+          password: values.password,
+          code: values.code,
+        })
+      )
+        .unwrap()
+        .catch((error) => {
+          console.log("error", error);
+          toastError(error.error);
+        });
+    }
   };
+
+  const handleRequestCode = () => {};
+
+  console.log("verifyCode", verifyCode);
 
   if (user) {
     return <Navigate to={from} replace />;
@@ -78,6 +96,20 @@ const Auth = ({ type }) => {
                 >
                   <Input placeholder={"Email Address"} />
                 </Form.Item>
+
+                {verifyCode && (
+                  <Form.Item
+                    name="code"
+                    rules={[
+                      {
+                        required: verifyCode,
+                        message: "Please enter in a code",
+                      },
+                    ]}
+                  >
+                    <Input placeholder={"Verification Code"} />
+                  </Form.Item>
+                )}
 
                 <Form.Item
                   name="password"
