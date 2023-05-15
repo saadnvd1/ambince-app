@@ -46,10 +46,6 @@ const Auth = ({ type }) => {
     }
   };
 
-  const handleRequestCode = () => {};
-
-  console.log("verifyCode", verifyCode);
-
   if (user) {
     return <Navigate to={from} replace />;
   }
