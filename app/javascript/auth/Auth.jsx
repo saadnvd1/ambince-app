@@ -133,12 +133,12 @@ const Auth = ({ type }) => {
             </div>
           </div>
           {type === "signup" && (
-            <p style={{ fontSize: 10, padding: 0 }}>
+            <p style={{ fontSize: 15, padding: 0 }}>
               <Link to={"/login"}>Already registered? Login Here</Link>
             </p>
           )}
           {type === "login" && (
-            <p style={{ fontSize: 10, padding: 0 }}>
+            <p style={{ fontSize: 15, padding: 0 }}>
               <Link to={"/signup"}>New? Signup Here</Link>
             </p>
           )}

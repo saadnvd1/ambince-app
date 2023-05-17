@@ -14,4 +14,9 @@ export const ROUTE_MAP = {
     label: "Inspiration",
     name: "inspiration",
   },
+  support: {
+    path: "/support",
+    label: "Support",
+    name: "support",
+  },
 };

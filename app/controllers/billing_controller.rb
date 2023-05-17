@@ -32,7 +32,8 @@ class BillingController < ApplicationController
     session = Stripe::Checkout::Session.create({
       success_url: ENV.fetch("STRIPE_CHECKOUT_SUCCESS_URL", "http://localhost:3000/billing/success"),
       cancel_url: ENV.fetch("STRIPE_CHECKOUT_CANCEL_URL", "http://localhost:3000"),
-      mode: "subscription",
+      # mode: "subscription", (temporarily commenting out)
+      mode: "payment",
       line_items: [{
         quantity: 1,
         price: price_id

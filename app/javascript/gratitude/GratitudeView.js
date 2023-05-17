@@ -99,7 +99,9 @@ const GratitudeView = () => {
         />
       </div>
       <div className={"save-entry-btn"}>
-        <Button onClick={handleSaveEntry}>Save Entry</Button>
+        <Button type={"primary"} onClick={handleSaveEntry}>
+          Save Entry
+        </Button>
       </div>
       <Divider>
         <div className={"past-entries-text"}>

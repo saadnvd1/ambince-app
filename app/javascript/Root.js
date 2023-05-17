@@ -24,7 +24,8 @@ const Root = () => {
   useEffect(() => {
     if (
       !window.location.href.includes("inspiration") &&
-      !window.location.href.includes("gratitude")
+      !window.location.href.includes("gratitude") &&
+      !window.location.href.includes("support")
     ) {
       navigate("/journal");
     }

@@ -8,6 +8,7 @@ import JournalView from "journal/JournalView";
 import GratitudeView from "gratitude/GratitudeView";
 import InspirationView from "inspiration/InspirationView";
 import { ROUTE_MAP } from "constants";
+import SupportView from "support/SupportView";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: ROUTE_MAP.inspiration.path,
         element: <InspirationView />,
+      },
+      {
+        path: ROUTE_MAP.support.path,
+        element: <SupportView />,
       },
       {
         path: "billing/success",
