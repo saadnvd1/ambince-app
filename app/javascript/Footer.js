@@ -6,7 +6,7 @@ const Footer = () => {
       <div>
         <b>We're here for you ❤️</b>
       </div>
-      <a href="mailto:help@ambince.com">help@ambince.com</a>
+      <a href="mailto:hello@ambince.com">hello@ambince.com</a>
     </div>
   );
 };

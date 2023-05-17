@@ -89,7 +89,7 @@ const UpgradeModalSuccess = () => {
               </ul>
               <Paragraph style={{ marginTop: 10 }}>
                 Please let us know if you have any questions or feedback. We're
-                always here to help! Contact us directly at help@ambince.com
+                always here to help! Contact us directly at hello@ambince.com
               </Paragraph>
             </>
           )}
