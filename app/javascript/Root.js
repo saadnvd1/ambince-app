@@ -81,7 +81,7 @@ const Root = () => {
           to={"/support"}
         >
           <p className="nav-item">
-            <RocketLaunchIcon height={24} /> Support
+            <RocketLaunchIcon height={24} /> Support Us
           </p>
         </NavLink>
         <UserSettings />
